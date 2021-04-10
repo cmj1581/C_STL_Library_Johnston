@@ -16,6 +16,7 @@
 #include <stack>
 #include <set>
 #include <utility>
+#include <map>
 using namespace std; 
 
 //Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/ clarifications added
@@ -63,6 +64,9 @@ class MyClassVector3 {
       cout << vec3[i] << " ";
   }
 };
+
+typedef map<string, int> MapT;
+typedef MapT::const_iterator MapIterT;
 
 
 int main(int argc, char* argv[]) 
@@ -207,7 +211,6 @@ int main(int argc, char* argv[])
 
     /****Section_Name****Pair_Structure*/
     //Write the code as presented in: 4. std::pair structure
-    cout << "Now for pair structures" << endl;
 
     pair<string, string > strstr; // make the data type pair first
     strstr.first = "Hello"; // assign them
@@ -226,17 +229,41 @@ int main(int argc, char* argv[])
 
     /****Section_Name**** Map_Insert*/
     //Write the code as presented in: 14. std::map::insert
+    MapT amap; //declared the map
+    pair<MapIterT, bool> result = amap.insert(make_pair("Abraham", 16)); // insert the pair into the map
+    assert(result.second == true); // change the bool to true so it doesn't do it again, maybe this would be useful in a loop if there's one or a few values I don't want to repeat?
+    assert(result.first->second == 16);
+    result = amap.insert(make_pair("Abraham", 17)); //change it but Abraham remains
+    assert(result.second == false); //Abraham wasn't the 17th president!
+    assert(result.first->second == 16); //go back go back
+
 
     //Write comments that help one better understand what the code is doing.
 
     /****Section_Name****Map_Summary*/
     //Write the code as presented in: 16. Map summary
-
+    cout << "Let's set up a little phonebook for the essentials" << endl;
+    map<string, string> phone_book; // let's make a phone book
+    phone_book["411"] = "Directory"; // assigning the unique values
+    phone_book["911"] = "Emergency";
+    phone_book["508-678-2811"] = "BCC";
+    if (phone_book.find("411") != phone_book.end()) { // make sure 411 is there
+      phone_book.insert(make_pair(string("411"), string("Directory")));
+    }
+    assert(phone_book.size() == 3);
+    map<string, string>::const_iterator it3; // iterate and printerate
+    for (it3 = phone_book.begin(); it3 != phone_book.end(); ++it3) {
+      cout << " " << it3->first << " " << it3->second << endl;
+    }
     //Write comments that help one better understand what the code is doing.
 
     /****Section_Name**** Sort_Algorithm*/
     //Write the code as presented in: 23. sort example
-
+    int arr[4] = {10, 20, 30, 40}; // initialize an array
+    sort(arr, arr + 4); // sort it
+    for (i = 0; i < 3; i++) {
+      cout << arr[i] << endl;
+    }
     //Write comments that help one better understand what the code is doing.
 
     /****Section_Name****Predicate_Algorithm*/
