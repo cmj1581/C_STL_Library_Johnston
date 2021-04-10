@@ -12,6 +12,10 @@
 #include <vector>
 #include <algorithm> 
 #include <string>
+#include <cassert>
+#include <stack>
+#include <set>
+#include <utility>
 using namespace std; 
 
 //Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/ clarifications added
@@ -61,7 +65,7 @@ class MyClassVector3 {
 };
 
 
-int main() 
+int main(int argc, char* argv[]) 
 {
     /****Section_Name***Vectors*/ 
     //Write the base code for: 5. std::vector example
@@ -144,20 +148,79 @@ int main()
   
 
     /****Section_Name***STL_Iterators*/ 
-    
+    vector <int> vint(10);
+    vint[0] = 10;
+    vint[1] = 20;
+    vint[2] = 30;
+    vint[3] = 40;
+    vint[4] = 50;
+    vint[5] = 60;
+    vint[6] = 70;
+    vint[7] = 80;
+    vint[8] = 90;
+    vint[9] = 100;
+
+    vector<int>::iterator it;
+    cout << endl << endl << "Hey look I'm using an iterator!" << endl;
+    for (it = vint.begin(); it != vint.end(); ++it) {
+      cout << endl << " " << *it;
+    }
 
     /****Section_Name*** Stack*/
+    cout << endl << endl << "Let's mess around with the stack and see what happens" << endl;
+    stack<int> st;
+    st.push(100); //puts one number on top of the stack
+    assert(st.size() == 1); // checking the size to see if it's one element
+    assert(st.top() == 100); // make sure the value on top is the one we put there
 
+    st.top() = 456; // assign 456 to the top
+    assert(st.top() == 456); // check the top to make sure it's 456
+
+    st.pop(); // remove the top element
+    assert(st.empty() == true); // make sure it's gone
 
     //Write comments that help one better understand what the code is doing.
 
     /****Section_Name**** Set*/
     //Write the code as presented in: 3. std::set
+    cout << endl << endl << "Now let's set up some values Dr. T" << endl;
+    set<int> iset;
+
+    iset.insert(11); //puttin in some values
+    iset.insert(-11);
+    iset.insert(55);
+    iset.insert(22);
+    iset.insert(22);
+    if (iset.find(55) != iset.end()) { // is 55 in there?
+      iset.insert(55); // if not let's get one in there
+    }
+    assert(iset.size() == 4); //make sure there's four numbers in there
+    set<int>::iterator it2; //set up an iterator like before
+    for (it2 = iset.begin(); it2 != iset.end(); it2++) { //spit out them values
+      cout << " " << *it2;
+    }
+
+    cout << endl << endl;
+
 
     //Write comments that help one better understand what the code is doing.
 
     /****Section_Name****Pair_Structure*/
     //Write the code as presented in: 4. std::pair structure
+    cout << "Now for pair structures" << endl;
+
+    pair<string, string > strstr; // make the data type pair first
+    strstr.first = "Hello"; // assign them
+    strstr.second = "Dr. T";
+
+    pair <int, string> intstr; // you can mix it up
+    intstr.first = 1;
+    intstr.second = "Uno";
+
+    pair<string, int> strint("dos", 2); // here's just to check that they're right
+    assert(strint.first == "dos");
+    assert(strint.second == 2);
+
 
     //Write comments that help one better understand what the code is doing.
 
