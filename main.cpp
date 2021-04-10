@@ -1,11 +1,4 @@
 /*
-	Input Validation with Ref Functions 
-	A cleaner way to do input validation
-	Validating input, an essential process.
-	Source: http://stackoverflow.com/questions/514420/how-to-validate-numeric-input-c
-	Keeping Dr. McMillan from breaking my code, defend against "dark side of the force",
-	and/or legitimate user error. 
-	//Try and Catch blocks are used in error checking
 	Teacher: Dr. Tyson McMillan, Ph.D.  
   STUDENT (McMillanite):
 */
@@ -15,94 +8,176 @@
                               // Extended 2-11-2016 by Dr. McMillan to add validation methods by datatype
 #include<string> //for string manipulation
 #include<sstream> //for string manipulation and comparison
-using namespace std;
+#include <iostream>
+#include <vector>
+#include <algorithm> 
+#include <string>
+using namespace std; 
 
-int main()
+//Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/ clarifications added
+class MyClassVector1 
+{ 
+  private:  
+      vector<int> vec; 
+  public: 
+      MyClassVector1 (vector<int> v)  //parameterized constructor
+      { 
+        vec = v; 
+      } 
+      void print() 
+      { 
+          /// print the value of vector 
+          for (int i = 0; i < vec.size(); i++) 
+          {
+              cout << vec[i] << " "; 
+          }    
+      } 
+};
+
+class MyClassVector2 {
+  vector<int> vec2;
+
+  public:
+    MyClassVector2(vector<int> v) : vec2(v) {
+    }
+    void print() {
+        for (int i = 0; i < vec2.size(); i++)
+          cout << vec2[i] << " ";
+    }
+};
+
+class MyClassVector3 {
+    vector<int>& vec3;
+  public:
+  MyClassVector3(vector<int>& arr)
+      : vec3(arr) {
+      }
+  void print() {
+    for (int i = 0; i < vec3.size(); i++)
+      cout << vec3[i] << " ";
+  }
+};
+
+
+int main() 
 {
-   //***********Validating int data type******************/
-	int input = 0;
-	input = validateInt(input); //validate my integer by function call, save that value into input
-    cout << "You entered valid int: " << input << endl;
+    /****Section_Name***Vectors*/ 
+    //Write the base code for: 5. std::vector example
+    vector<double> vd; //vd elments are floating point numbers
+    vector<int> vi; //vi elements are integer numbers 
+    vector<string> vs; //vs elements are string objects 
+
+    //Expand this code to:
+
+    //add 3 elements to the vd vector
+    vd.push_back(1);
+    vd.push_back(2);
+    vd.push_back(3);
+    vd.push_back(55.4); 
+
+    //add 3 elements to the vi vector
+    vi.push_back(10);
+    vi.push_back(22);
+    vi.push_back(53);
+   // add 3 elements to the vs vector
+    vs.push_back("Win");
+    vs.push_back("or");
+    vs.push_back("lose");
+    vs.push_back("you can always come out ahead by learning from the experience");
+   // display the 3 elements in the vd vector
+   cout << "\nValues in vd: \n"; 
+   for(double vals : vd)
+   {
+     cout << vals << endl; 
+   }
+   cout << "\nAnother way to print vector: " << endl; 
+   for(int i = 0; i < vd.size(); i++)
+   {
+     cout << vd[i] << endl; 
+   }
+    cout << endl;
+    //display the 3 elements in the vi vector
+    cout << "Here are your vi elements Mr. T" << endl;
+    for (int i = 0; i < 10; i++) {
+      cout << "*";
+    }
+    cout << endl;
+    for (int vals : vi) {
+      cout << vals << endl;
+    }
+   // display the 3 elements in the vs vector
+    cout << endl << "Here are your vs elements Mr. T" << endl;
+    for (int i = 0; i < 10; i++) {
+      cout << "*";
+    }
+    cout << endl;
+    for (string vals : vs) {
+      cout << vals << " ";
+    }
+    cout << endl;
+    /****Section_Name***Vector_as_Class_Member*/ 
+    //Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/
+
+   cout << "\nVector_as_Class_Member" << endl; 
+    vector<int> vec; 
+        for (int i = 1; i <= 5; i++) 
+            vec.push_back(i); 
+        MyClassVector1 obj(vec); 
+        obj.print(); 
+      
+      //Continue with MyClassVector2 and MyClassVector3
+    cout << endl << "Vector_Using_Initializer" << endl;
+    vector<int> vec2;
+    for (int i = 1; i <= 5; i++)
+        vec.push_back(i);
+    MyClassVector2 obj2(vec);
+    obj2.print();
+
+    cout << endl << "Vector as a reference" << endl;
+    vector<int> vec3;
+    for (int i = 1; i <= 5; i++)
+      vec3.push_back(i);
+    MyClassVector3 obj3(vec);
+    obj3.print();
+  
+
+    /****Section_Name***STL_Iterators*/ 
     
-	/****************Extend code to Validate double (follow int pattern)**********/
-	double inputDouble = 0.0;
-  	inputDouble = validateDouble(inputDouble); //validate my double by function call, save that value into inputDouble
-    cout << "You entered valid double: " << inputDouble << endl;
 
-	/****************Extend code to Validate char (follow int pattern)**********/
-	char inputChar = '\0'; //{0}
-	inputChar = validateChar(inputChar); //validate my char by function call, save that value into inputChar
-    cout << "You entered valid char: " << inputChar << endl;
+    /****Section_Name*** Stack*/
 
-	/****************Extend code to Validate string (follow int pattern, if possible)**********/
-	string inputString = (""); 
-	inputString = validateString(inputString); //validate my string by function call, save that value into inputString
-    cout << "You entered string: " << inputString << endl;
 
-	/****************Extend code to Validate if truly an int and greater than 77 **********/
-	int input2 = 0;
-	
-	do
-	{
-		cout << "Enter an integer greater than 77." << endl;  
-		input2 = validateInt(input2); //validate my integer by function call, save that value into input
-		
-		if(input2 < 77)
-		{
-			cout << "\nInvalid input: (" << input2 <<") number must be greater than 77." << endl;
-		}
-	}
-	while(input2 < 77); //loop until input2 is greather than 77
+    //Write comments that help one better understand what the code is doing.
 
-    cout << "You entered valid int: " << input2 << endl;
+    /****Section_Name**** Set*/
+    //Write the code as presented in: 3. std::set
 
-	/****************Extend code to Validate if truly an double and greater than 0.00 **********/
-	double inputDouble2 = 0.0;
-	
-	do
-	{
-		cout << "Enter an number greater than 0."<< endl; 
-		inputDouble2 = validateDouble(inputDouble2); //validate my integer by function call, save that value into input
-		
-		if(inputDouble2 < 0)
-		{
-			cout << "\nInvalid input: (" << inputDouble2 <<") number must be greater than 0." << endl;
-		}
-	}
-	while(inputDouble2 < 0); //loop until inputDouble2 is greather than 0
+    //Write comments that help one better understand what the code is doing.
 
-    cout << "You entered valid double: " << inputDouble2<< endl;
-    //A program to output grade values
-   //based upon numberical input of the user yourName: Teacher: Dr_T 8-28-2019
-   double grade = 0.0; 
-   do
-   { // begin do 
-      cout << "\nPlease enter a numerical grade (-1 to exit): ";
-      grade = validateDouble(grade); //accept grade and validate the data type
-      //if condition test
-      if(grade >= 90.0)
-      {
-        cout << "\nThat's an A!" << endl; 
-      }
-      else if(grade >= 80.0 && grade <= 89.9)
-      {
-        cout << "\nThat's a B!" << endl; 
-      }
-      else if(grade >= 70.0 && grade <= 79.9)
-      {
-        cout << "\nThat's a C!" << endl; 
-      }
-      else if(grade >= 60.0 && grade <= 69.9)
-      {
-        cout << "\nYikes. That's a D!" << endl; 
-      }
-      else if(grade < 60.0)
-      {
-        cout << "\nSee you next semester: F" << endl; 
-      }
-      else {cout << "\nInvalid input." << endl;}
+    /****Section_Name****Pair_Structure*/
+    //Write the code as presented in: 4. std::pair structure
 
-   }while(grade != -1); //end do 
-   
-    return 0;
-}
+    //Write comments that help one better understand what the code is doing.
+
+    /****Section_Name**** Map_Insert*/
+    //Write the code as presented in: 14. std::map::insert
+
+    //Write comments that help one better understand what the code is doing.
+
+    /****Section_Name****Map_Summary*/
+    //Write the code as presented in: 16. Map summary
+
+    //Write comments that help one better understand what the code is doing.
+
+    /****Section_Name**** Sort_Algorithm*/
+    //Write the code as presented in: 23. sort example
+
+    //Write comments that help one better understand what the code is doing.
+
+    /****Section_Name****Predicate_Algorithm*/
+    //Write the code as presented in: 25. count_if and predicate function
+
+    //Write comments that help one better understand what the code is doing. 
+
+      return 0; 
+ }
