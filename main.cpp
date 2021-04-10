@@ -17,7 +17,6 @@
 #include <set>
 #include <utility>
 #include <map>
-using namespace std; 
 
 //Credit https://www.geeksforgeeks.org/passing-vector-constructor-c/ clarifications added
 class MyClassVector1 
@@ -67,6 +66,10 @@ class MyClassVector3 {
 
 typedef map<string, int> MapT;
 typedef MapT::const_iterator MapIterT;
+
+bool less_than_7(int value) {
+      return value < 7;
+    }
 
 
 int main(int argc, char* argv[]) 
@@ -259,9 +262,9 @@ int main(int argc, char* argv[])
 
     /****Section_Name**** Sort_Algorithm*/
     //Write the code as presented in: 23. sort example
-    int arr[4] = {10, 20, 30, 40}; // initialize an array
+    int arr[4] = {20, 10, 40, 30}; // initialize an array
     sort(arr, arr + 4); // sort it
-    for (i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) { //print 
       cout << arr[i] << endl;
     }
     //Write comments that help one better understand what the code is doing.
@@ -269,6 +272,8 @@ int main(int argc, char* argv[])
     /****Section_Name****Predicate_Algorithm*/
     //Write the code as presented in: 25. count_if and predicate function
 
+    vector<int> v1;
+    int count_less = std::count_if(v1.begin(), v1.end(), less_than_7); // we check to see if the number given is less than 7 to do something.
     //Write comments that help one better understand what the code is doing. 
 
       return 0; 
