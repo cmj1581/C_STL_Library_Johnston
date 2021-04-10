@@ -38,7 +38,7 @@ class MyClassVector2 {
   vector<int> vec2;
 
   public:
-    MyClassVector2(vector<int> v) : vec2(v) {
+    MyClassVector2(vector<int> v2) : vec2(v2) {
     }
     void print() {
         for (int i = 0; i < vec2.size(); i++)
@@ -47,7 +47,9 @@ class MyClassVector2 {
 };
 
 class MyClassVector3 {
+
     vector<int>& vec3;
+
   public:
   MyClassVector3(vector<int>& arr)
       : vec3(arr) {
@@ -129,15 +131,15 @@ int main()
     cout << endl << "Vector_Using_Initializer" << endl;
     vector<int> vec2;
     for (int i = 1; i <= 5; i++)
-        vec.push_back(i);
-    MyClassVector2 obj2(vec);
+        vec2.push_back(i);
+    MyClassVector2 obj2(vec2);
     obj2.print();
 
     cout << endl << "Vector as a reference" << endl;
     vector<int> vec3;
     for (int i = 1; i <= 5; i++)
       vec3.push_back(i);
-    MyClassVector3 obj3(vec);
+    MyClassVector3 obj3(vec3);
     obj3.print();
   
 
